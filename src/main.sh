@@ -34,11 +34,11 @@ search () {
         # TODO: 日時が新しくなっているなら更新すると更新通知できるけど今は新着通知のみ実施する予定なので不要なので実装していない
         exists=$(/bin/bash ${DB_API} exists ${key})
         if [ "${exists}" != "0" ]; then
-            echo "already exists : ${key}"
             continue
         fi
 
         # store
+        echo "store : ${key}"
         /bin/bash ${DB_API} set ${key} "${val}"
     done
     echo "search end   : $(date)"
