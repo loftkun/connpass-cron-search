@@ -1,0 +1,9 @@
+version: "3.1"
+services:
+  search:
+    build: .
+    depends_on:
+      - store
+  store:
+    image: redis:latest
+
