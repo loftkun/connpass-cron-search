@@ -17,7 +17,7 @@ set_key_val() {
 
 get_key_val() {
     key=${1}
-    redis-cli -h redis --raw get ${key}
+    redis-cli -h ${REDIS_HOST} --raw get ${key}
 }
 
 switch_args() {
