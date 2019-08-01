@@ -6,22 +6,30 @@ DIR=$(dirname $0)
 CONNPASS_API_SEARCH=${DIR}/api-shell-scripts/src/search.sh
 DB_API=${DIR}/db/api.sh
 
-# wait for db launch
-/bin/bash ${DB_API} wait
+check_env(){
+    if [ ! -v SEARCH_KEYWORD_OR ]; then
+      echo "env empty : SEARCH_KEYWORD_OR"
+      exit 1
+    fi
+    if [ ! -v SEARCH_ADDRESS_MATCHER ]; then
+      echo "env empty : SEARCH_ADDRESS_MATCHER"
+      exit 1
+    fi
+    if [ ! -v SEARCH_MAX_COUNT ]; then
+      echo "env empty : SEARCH_MAX_COUNT"
+      exit 1
+    fi
+    if [ ! -v SEARCH_INTERVAL_SEC ]; then
+      echo "env empty : SEARCH_INTERVAL_SEC"
+      exit 1
+    fi
+}
 
-# search param
-keyword_or=福岡,fukuoka
-address_matcher='福岡|北九州|fukuoka'
-max_count=100
-
-# interval[sec]
-INTERVAL=600
-
-search () {
+search(){
     echo "search start : $(date)"
 
     # search
-    events=$(/bin/bash ${CONNPASS_API_SEARCH} ${keyword_or} ${address_matcher} ${max_count})
+    events=$(/bin/bash ${CONNPASS_API_SEARCH} ${SEARCH_KEYWORD_OR} "${SEARCH_ADDRESS_MATCHER}" ${SEARCH_MAX_COUNT})
     #echo ${events} | jq -s .
     
     len=$(echo $events | jq -s '. | length')
@@ -51,8 +59,17 @@ search () {
     echo "search end   : $(date)"
 }
 
-while true;
-do
-    search
-    sleep ${INTERVAL}
-done
+main(){
+    check_env
+
+    # wait for db launch
+    /bin/bash ${DB_API} wait
+
+    while true;
+    do
+        search
+        sleep ${SEARCH_INTERVAL_SEC}
+    done
+}
+
+main
