@@ -1,9 +1,13 @@
 #! /bin/bash
+set -eu
 
 # path
 DIR=$(dirname $0)
 CONNPASS_API_SEARCH=${DIR}/api-shell-scripts/src/search.sh
 DB_API=${DIR}/db/api.sh
+
+# wait for db launch
+/bin/bash ${DB_API} wait
 
 # search param
 keyword_or=福岡,fukuoka
@@ -28,17 +32,20 @@ search () {
         # key : id
         # val : event
         key=$(echo ${event} | jq .event_id)
-        val=$(echo ${event} | jq -c '. | tojson')
+        val=$(echo ${event} | jq -c -a .)
+        val=${val#\"}
+        val=${val%\"}
 
         # check
         # TODO: 日時が新しくなっているなら更新すると更新通知できるけど今は新着通知のみ実施する予定なので不要なので実装していない
         exists=$(/bin/bash ${DB_API} exists ${key})
+        echo exists=${exists}
         if [ "${exists}" != "0" ]; then
             continue
         fi
 
         # store
-        echo "store : ${key}"
+        #echo "store ${key} : val=${val}"
         /bin/bash ${DB_API} set ${key} "${val}"
     done
     echo "search end   : $(date)"

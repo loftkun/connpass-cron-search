@@ -5,5 +5,12 @@ services:
     depends_on:
       - store
   store:
-    image: redis:latest
+    #image: redis:latest
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./volumes/db:/data/db
+      - ./volumes/configdb:/data/configdb
 

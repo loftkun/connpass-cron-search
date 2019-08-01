@@ -1,4 +1,5 @@
 #! /bin/bash
+set -eu
 
 CONTAINER=connpasscronsearch_search_1
 

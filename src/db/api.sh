@@ -1,6 +1,11 @@
 #! /bin/bash
+set -eu
+
 DIR=$(dirname $0)
 
-# use redis
-REDIS_API=${DIR}/redis.sh
-/bin/bash ${REDIS_API} "$@"
+#DB=${DIR}/redis.sh
+DB=${DIR}/mongo.sh
+
+/bin/bash ${DB} "$@"
+
+
