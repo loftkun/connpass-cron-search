@@ -1,1 +1,2 @@
-volumes
+volumes/mongo/db
+volumes/mongo/configdb
