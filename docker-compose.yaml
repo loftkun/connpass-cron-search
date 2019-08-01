@@ -4,13 +4,16 @@ services:
     build: .
     depends_on:
       - store
+  #store:
+  #  image: redis:latest
   store:
-    #image: redis:latest
     image: mongo:latest
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: connpass-db
     volumes:
-      - ./volumes/db:/data/db
-      - ./volumes/configdb:/data/configdb
+      - ./volumes/mongo/db:/data/db
+      - ./volumes/mongo/configdb:/data/configdb
+      - ./volumes/mongo/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
 
