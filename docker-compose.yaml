@@ -2,6 +2,20 @@ version: "3.1"
 services:
   search:
     build: .
+    environment:
+      # search
+      SEARCH_KEYWORD_OR: 福岡,fukuoka
+      SEARCH_ADDRESS_MATCHER: 福岡|北九州|fukuoka
+      SEARCH_MAX_COUNT: 100
+      SEARCH_INTERVAL_SEC: 600
+
+      # mongo
+      MONGO_HOST: store
+      MONGO_PORT: 27017
+      MONGO_DB: connpass-db
+      MONGO_USER: connpass-user
+      MONGO_PASS: 1234
+      MONGO_COLLECTION: events
     depends_on:
       - store
   #store:
