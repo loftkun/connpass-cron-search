@@ -1,4 +1,5 @@
 #! /bin/bash
+set -eu
 
 REDIS_HOST=store
 
