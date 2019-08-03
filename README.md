@@ -68,8 +68,10 @@ You can save search results to MongoDB.
 
 ### running standalone with docker compose
 
-You can launch with MongoDB.
+You can launch with MongoDB & [mongo-express](https://github.com/mongo-express/mongo-express)
 
 ``` shell
 $ docker-compose up
 ```
+
+You can check `events` colletion by visiting `http://localhost:8081/db/connpass-db/events` 
