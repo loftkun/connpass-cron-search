@@ -13,6 +13,7 @@ $ docker run -d \
     -e SEARCH_ADDRESS_MATCHER="福岡|北九州|fukuoka" \
     -e SEARCH_MAX_COUNT=100 \
     -e SEARCH_INTERVAL_SEC=600 \
+    -e ENABLE_STORE=true \
     -e MONGO_HOST=store \
     -e MONGO_PORT=27017 \
     -e MONGO_DB=connpass-db \
