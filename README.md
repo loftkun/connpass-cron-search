@@ -6,7 +6,17 @@ You can find Docker image at [Docker Hub](https://hub.docker.com/r/loftkun/connp
 
 ## usage
 
-### running standalone
+### running with docker compose
+
+You can launch with MongoDB and WebUI([mongo-express](https://github.com/mongo-express/mongo-express))
+
+``` shell
+$ docker-compose up
+```
+
+You can view `events` colletion by visiting `http://localhost:8081/db/connpass-db/events`
+
+### running standalone ( not using DB )
 
 ``` shell
 $ docker run -d \
@@ -65,13 +75,4 @@ You can save search results to MongoDB.
 | MONGO_USER | username | connpass-user |
 | MONGO_PASS | password | 1234 | 
 | MONGO_COLLECTION | collection name | events | 
-
-### running standalone with docker compose
-
-You can launch with MongoDB & [mongo-express](https://github.com/mongo-express/mongo-express)
-
-``` shell
-$ docker-compose up
-```
-
-You can check `events` colletion by visiting `http://localhost:8081/db/connpass-db/events` 
+ 
