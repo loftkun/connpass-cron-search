@@ -62,8 +62,8 @@ search(){
 main(){
     check_env
 
-    # wait for db launch
-    /bin/bash ${DB_API} wait
+    # check connect to db
+    /bin/bash ${DB_API} check_connect
 
     while true;
     do

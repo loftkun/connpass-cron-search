@@ -26,9 +26,9 @@ eval_js(){
   mongo --eval "${1}" ${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB} -u ${MONGO_USER} -p ${MONGO_PASS} --quiet
 }
 
-wait_launch() {
+check_connect() {
   until eval_js "db.${MONGO_COLLECTION}.find().count();" > /dev/null 2>&1 ; do
-    echo "wait for \"${MONGO_HOST}\" launch..."
+    echo "establishing database connection to \"${MONGO_HOST}\" ..."
     sleep 5
   done
 }
@@ -52,9 +52,9 @@ get_key_val() {
 switch_args() {
   SUBCOMMAND=$1
   case "$SUBCOMMAND" in
-    "wait" )
+    "check_connect" )
       shift
-      wait_launch $@
+      check_connect $@
       ;;
     "exists" )
       shift
