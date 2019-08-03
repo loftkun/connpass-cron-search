@@ -39,6 +39,7 @@ You can save search results to MongoDB.
 
 | param | description | e.g. |
 | --- | --- | --- |
+| ENABLE_STORE | If true, save search results to MongoDB | true |
 | MONGO_HOST | server to connect to | store | 
 | MONGO_PORT | port to connect to | 27017 | 
 | MONGO_DB | database name | connpass-db |
