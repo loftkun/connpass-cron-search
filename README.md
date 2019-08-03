@@ -16,7 +16,7 @@ $ docker run -d \
     -e SEARCH_MAX_COUNT=100 \
     -e SEARCH_INTERVAL_SEC=600 \
     -e ENABLE_STORE=false \
-    loftkun/connpass-cron-search:latest
+    loftkun/connpass-cron-search:1.0
 $ docker logs -f connpass-cron-search | tee ./connpass-cron-search.log
 ```
 
@@ -38,7 +38,7 @@ $ docker run -d \
     -e MONGO_USER=connpass-user \
     -e MONGO_PASS=1234 \
     -e MONGO_COLLECTION=events \
-    loftkun/connpass-cron-search:latest
+    loftkun/connpass-cron-search:1.0
 ```
 
 ### environment variables
