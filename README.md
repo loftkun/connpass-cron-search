@@ -2,9 +2,27 @@
 
 search and store new arrival events of [connpass](https://connpass.com/)
 
+You can find Docker image at [Docker Hub](https://hub.docker.com/r/loftkun/connpass-cron-search).
+
 ## usage
 
 ### running standalone
+
+``` shell
+$ docker run -d \
+    --name connpass-cron-search \
+    -e SEARCH_KEYWORD_OR="福岡,fukuoka" \
+    -e SEARCH_ADDRESS_MATCHER="福岡|北九州|fukuoka" \
+    -e SEARCH_MAX_COUNT=100 \
+    -e SEARCH_INTERVAL_SEC=600 \
+    -e ENABLE_STORE=false \
+    loftkun/connpass-cron-search:latest
+$ docker logs -f connpass-cron-search | tee ./connpass-cron-search.log
+```
+
+### running with MongoDB
+
+You can save search results(new arrival events) to MongoDB.
 
 ``` shell
 $ docker run -d \
@@ -29,7 +47,7 @@ $ docker run -d \
 
 | param | description | e.g. |
 | --- | --- | --- |
-| SEARCH_KEYWORD_OR | search keyword | "福岡,fukuoka" | 
+| SEARCH_KEYWORD_OR | search keyword<br>(comma separated)| "福岡,fukuoka" | 
 | SEARCH_ADDRESS_MATCHER | matcher for address of event | "福岡&#124;北九州&#124;fukuoka" | 
 | SEARCH_MAX_COUNT | search num of latest events<br>( if set 0, search all events ) | 100 |
 | SEARCH_INTERVAL_SEC | periodical search duration interval[sec] | 600 |
@@ -40,7 +58,7 @@ You can save search results to MongoDB.
 
 | param | description | e.g. |
 | --- | --- | --- |
-| ENABLE_STORE | If true, save search results to MongoDB | true |
+| ENABLE_STORE | if true, save search results to MongoDB | true |
 | MONGO_HOST | server to connect to | store | 
 | MONGO_PORT | port to connect to | 27017 | 
 | MONGO_DB | database name | connpass-db |
@@ -49,6 +67,8 @@ You can save search results to MongoDB.
 | MONGO_COLLECTION | collection name | events | 
 
 ### running standalone with docker compose
+
+You can launch with MongoDB.
 
 ``` shell
 $ docker-compose up
