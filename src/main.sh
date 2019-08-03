@@ -23,6 +23,10 @@ check_env(){
       echo "env empty : SEARCH_INTERVAL_SEC"
       exit 1
     fi
+    if [ ! -v ENABLE_STORE ]; then
+      echo "env empty : ENABLE_STORE"
+      exit 1
+    fi
 }
 
 search(){
@@ -35,8 +39,14 @@ search(){
     len=$(echo $events | jq -s '. | length')
     for i in $( seq 0 $(($len - 1)) ); do
         event=$(echo $events | jq -s .[$i])
-        echo ${event} | jq -r '. | (.event_id | tostring) + " | " + .started_at + " | " + .title + " | " + .address+ " | " + .event_url'
         
+        if [ ${ENABLE_STORE} == "true" ]; then
+          echo ${event} | jq -r '. | (.event_id | tostring) + " | " + .started_at + " | " + .title + " | " + .address+ " | " + .event_url'
+        else
+          echo ${event} | jq -r -c .
+          continue
+        fi
+
         # key : id
         # val : event
         key=$(echo ${event} | jq .event_id)
@@ -60,16 +70,17 @@ search(){
 }
 
 main(){
-    check_env
+  check_env
 
-    # check connect to db
+  # check connect to db
+  if [ ${ENABLE_STORE} == "true" ]; then
     /bin/bash ${DB_API} check_connect
-
-    while true;
-    do
-        search
-        sleep ${SEARCH_INTERVAL_SEC}
-    done
+  fi
+  while true;
+  do
+      search
+      sleep ${SEARCH_INTERVAL_SEC}
+  done
 }
 
 main
