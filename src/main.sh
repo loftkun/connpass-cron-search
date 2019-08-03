@@ -76,6 +76,7 @@ main(){
   if [ ${ENABLE_STORE} == "true" ]; then
     /bin/bash ${DB_API} check_connect
   fi
+  
   while true;
   do
       search
