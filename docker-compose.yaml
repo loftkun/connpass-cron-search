@@ -9,7 +9,8 @@ services:
       SEARCH_MAX_COUNT: 100
       SEARCH_INTERVAL_SEC: 600
 
-      # mongo
+      # store 
+      ENABLE_STORE: "true"
       MONGO_HOST: store
       MONGO_PORT: 27017
       MONGO_DB: connpass-db
