@@ -1,8 +1,3 @@
-
-// insert dummy
-print("insert dummy")
-db["connpass-db"].insert({dummy:0});
-
 // create user
 print("create user")
 var newUsers = [
