@@ -6,7 +6,7 @@ services:
       # search
       SEARCH_KEYWORD_OR: 福岡,fukuoka
       SEARCH_ADDRESS_MATCHER: 福岡|北九州|fukuoka
-      SEARCH_MAX_COUNT: 100
+      SEARCH_MAX_COUNT: 300
       SEARCH_INTERVAL_SEC: 600
 
       # store 
