@@ -8,13 +8,13 @@ You can find Docker image at [Docker Hub](https://hub.docker.com/r/loftkun/connp
 
 ### running with docker compose
 
-You can launch with MongoDB and WebUI([mongo-express](https://github.com/mongo-express/mongo-express))
+You can launch with MongoDB and WebUI ([mongo-express](https://github.com/mongo-express/mongo-express))
 
 ``` shell
 $ docker-compose up
 ```
 
-You can view `events` colletion by visiting `http://localhost:8081/db/connpass-db/events`
+You can view `events` collection by visiting `http://localhost:8081/db/connpass-db/events`
 
 ### running standalone ( not using DB )
 
@@ -32,7 +32,7 @@ $ docker logs -f connpass-cron-search | tee ./connpass-cron-search.log
 
 ### running with MongoDB
 
-You can save search results(new arrival events) to MongoDB.
+You can save search results (new arrival events) to MongoDB.
 
 ``` shell
 $ docker run -d \
